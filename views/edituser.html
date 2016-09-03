@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1= title	user
+	p this is a test
+	input(type="text", placeholder="your name")
+	input(type="password",placeholder="password")
+
+	ul
+	for user in userlist
+		li #{user.name} age is #{user.age}
+	else
+		li sorry, no user!

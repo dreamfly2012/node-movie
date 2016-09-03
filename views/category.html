@@ -1,0 +1,16 @@
+<% include header.html %>
+<div class="ui inverted vertical masthead center aligned segment">
+   	<div class="ui container">
+		<h1 class="ui h1">文章列表</h1>
+		<ul class="ui list">
+		  <% posts.forEach(function(post){ %>
+		    <li class="ui item">
+		    	<h2 class="ui h2"><%= post.title %></h2>
+		    	<p><%= post.content %></p>
+		    </li>
+		  <% }); %>
+		</ul>
+	</div>
+</div>	
+</body>
+</html>

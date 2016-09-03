@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示用户数据</title>
+</head>
+<body>
+	<h1><%= title%></h1>
+	<ul>
+		<% userlist.forEach(function(user){ %>  
+            <li><%= user.name %> <%= user.age %></li>  
+        <% }) %>  
+	</ul>
+</body>
+</html>
