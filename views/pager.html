@@ -1,0 +1,131 @@
+<!--分页-->
+<ul class="pager">
+    <!--处理数字显示个数-->
+    <% var prevNum = 10; var nextNum=10; %>
+             
+    <% if(pager.pageCount-pager.pageCurrent > 5){ %>
+      <% prevNum = 5 %>
+    <% } else { %>
+      <% prevNum = prevNum - (pager.pageCount-pager.pageCurrent) %>
+    <% } %>
+
+    <% if(pager.pageCurrent-5 > 0){ %>
+      <% nextNum = 5 %>
+    <% } else { %>
+      <% nextNum = nextNum - (pager.pageCurrent) %>
+    <% } %> 
+
+    <% if(pager.pageCount-pager.pageCurrent > 5 && pager.pageCurrent-5 > 0){ %>
+          <% prevNum=5 %>
+          <% nextNum=4 %>
+    <%}%>
+    <!--处理数字显示个数 end-->
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            共<%= pager.maxNum %>条
+        </a>
+    </li>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            总<%= pager.pageCount %> 页
+        </a>
+    </li>
+    <% if(pager.maxNum==0){ %>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            首页
+        </a>
+    </li>
+    <% }else{ %>
+    <li>
+        <a href="<%= pager.pagePath %>page=1">
+            首页
+        </a>
+    </li>
+    <%}%>
+    <!--判断有没有前一页-->
+    <%if(pager.pageCurrent==1){%>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            上一页
+        </a>
+    </li>
+    <%}else{%>
+               <%if(pager.maxNum==0){%>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            上一页
+        </a>
+    </li>
+    <% }else{ %>
+    <li>
+        <a href="<%=pager.pagePath%>page=<%=parseInt(pager.pageCurrent)-1%>">
+            上一页
+        </a>
+    </li>
+    <%}%> 
+    <%}%>
+
+    <!--判断有没有前一页  end-->
+    <!--循环显示页码-->
+    <% for(var i = prevNum; i > 0; i--){ %>
+             <%  if( parseInt(pager.pageCurrent)-i > 0 ) { %>
+    <li>
+        <a href="<%=pager.pagePath%>page=<%=parseInt(pager.pageCurrent)-i%>">
+            <%=(parseInt(pager.pageCurrent)-i)%>
+        </a>
+    </li>
+    <%}}%>
+    <li class="active">
+        <a href="<%=pager.pagePath%>page=<%=pager.pageCurrent%>">
+            <%=pager.pageCurrent%>
+        </a>
+    </li>
+    <% for(var i = 1; i <=nextNum; i++){ %>
+             <%  if( parseInt(pager.pageCurrent)+i <= pager.pageCount ) { %>
+    <li>
+        <a href="<%=pager.pagePath%>page=<%=parseInt(pager.pageCurrent)+i%>">
+            <%=parseInt(pager.pageCurrent)+i%>
+        </a>
+    </li>
+    <%}}%>
+    <!--循环显示页码  end-->
+    <!--判断有没有下一页-->
+    <%if(pager.pageCurrent==pager.pageCount){%>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            下一页
+        </a>
+    </li>
+    <%}else{%>
+      <%if(pager.maxNum==0){%>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            下一页
+        </a>
+    </li>
+    <%}else{%>
+    <li>
+        <a href="<%=pager.pagePath%>page=<%=parseInt(pager.pageCurrent)+1%>">
+            下一页
+        </a>
+    </li>
+    <%}%> 
+           
+            <%}%>
+    <!--判断有没有下一页  end-->
+    <%if(pager.maxNum==0){%>
+    <li class="disabled">
+        <a href="javascript:void(0)">
+            尾页
+        </a>
+    </li>
+    <%}else{%>
+    <li>
+        <a href="<%=pager.pagePath%>page=<%=pager.pageCount%>">
+            尾页
+        </a>
+    </li>
+    <%}%>
+</ul>
+<!--分页 end-->

@@ -1,0 +1,17 @@
+<% include adminheader.html %>
+
+<div class="container">
+   	<div class="row">
+   		<h1 class="ui header white_imp">编辑分类</h1>
+   		<form class="ui form" action="/category/edit_do/" method="post">
+		  <div class="form-group">
+		    <label class='white_imp'>分类名</label>
+		    <input type="text" name="name" class="form-control" placeholder="分类名" value="<%= name %>"/>
+		  </div>
+		  <input type="hidden" name="id" value="<%= id %>"/>
+		  <button class="btn btn-success" type="submit">编辑</button>
+		</form>
+	</div>
+</div>		
+</body>
+</html>

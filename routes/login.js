@@ -1,8 +1,8 @@
 var mysql = require('mysql');
 var User = require('../model/user');
 var express = require('express');
-var session = require('session');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -30,16 +30,17 @@ exports.handle = function(req,res,next){
 
 	user.loginbyusername(username,password,function(err,result){
         if(err){
-            res.json({result: 'error'});
+            res.json({result: err});
         }
 
         console.log(result);
-        if(result.length==0){
-        	req.session.uid = result[0].id;
-        	console.log(req.session.uid);
-        	res.json({result: 'false'});
+        if(result==undefined || result.length==0){
+            console.log('result null');
+        	res.json({result: false});
         }else{
-        	res.json({result: 'true'});
+            req.session.uid = result[0].id;
+            console.log(req.session.uid);
+        	res.json({result: true});
         }
         //res.send(result.length === 1 ? result[0]:result);
         

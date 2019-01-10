@@ -1,0 +1,35 @@
+<% include adminheader.html %>
+
+<div class="container">
+   	<div class="row">
+   		<h1 class="ui header white_imp">添加文章</h1>
+   		<form class="ui form" action="/post/add_do/" method="post">
+		  <div class="form-group">
+		    <label class='white_imp'>标题</label>
+		    <input type="text" name="title" class="form-control" placeholder="标题">
+		  </div>
+		  <div class="form-group">
+		    <label class='white_imp'>简介</label>
+		    <input type="text" name="summary" class="form-control" placeholder="简介">
+		  </div>
+		  <div class="form-group">
+		    <label class='white_imp'>内容</label>
+		    <script id="container" name="content" type="text/plain"></script>
+		    <!-- 配置文件 -->
+		    <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+		    <!-- 编辑器源码文件 -->
+		    <script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+		    <!-- 实例化编辑器 -->
+		    <script type="text/javascript">
+		    	window.UEDITOR_HOME_URL = "/ueditor/ue/";
+		        var ue = UE.getEditor('container',{
+		        	initialFrameHeight:600
+		        });
+		    </script>
+		  </div>
+		  <button class="btn btn-success" type="submit">添加</button>
+		</form>
+	</div>
+</div>		
+</body>
+</html>
