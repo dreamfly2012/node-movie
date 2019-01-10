@@ -1,0 +1,18 @@
+<% include header.html %>
+<div class="ui inverted masthead aligned segment">
+    <div class="ui container">
+        <div class="ui list">
+            <% posts.forEach(function(post){ %>
+            <div class="ui item">
+                <h2 class="ui h2">
+                    <a href="/article/<%= post.id %>"><%= post.title %></a>
+                </h2>
+                <p>
+                    <%- post.summary %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+        <% include pager.html %>
+    </div>
+</div>

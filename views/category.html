@@ -1,16 +1,36 @@
 <% include header.html %>
-<div class="ui inverted vertical masthead center aligned segment">
+<div class="ui inverted vertical masthead aligned segment">
    	<div class="ui container">
-		<h1 class="ui h1">文章列表</h1>
-		<ul class="ui list">
-		  <% posts.forEach(function(post){ %>
-		    <li class="ui item">
-		    	<h2 class="ui h2"><%= post.title %></h2>
-		    	<p><%= post.content %></p>
-		    </li>
+		<h1 class="ui h1">分类列表</h1>
+		<a class="ui ui-button" href="/category/add/">添加分类</a>
+		<div class="ui list">
+		  <% categories.forEach(function(category){ %>
+		    <div class="ui item">
+		    	<h2 class="ui h2"><a href="/category/edit/<%= category.id %>"><%= category.name %></a><a style="padding-left:20px;" class="delete" data-id="<%= category.id %>">删除</a></h2>
+		    </div>
 		  <% }); %>
-		</ul>
+		</div>
 	</div>
-</div>	
+</div>
+<script type="text/javascript">
+	$('.delete').click(function(){
+		var id = $(this).attr('data-id');
+		if(confirm('是否删除?')){
+			$.ajax({
+				url:"/category/delete/",
+				data:{id:id},
+				dataType:'json',
+				type:'POST',
+				success:function(data){
+					if(data.result==true) {
+						window.location.reload();
+					} else {
+						alert('删除失败');
+					}
+				}
+			});
+		}
+	});
+</script>	
 </body>
 </html>

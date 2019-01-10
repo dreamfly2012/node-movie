@@ -8,3 +8,25 @@ body {
 a {
   color: #00B7FF;
 }
+.fr{
+	float:right;
+}
+.fl {
+	float:left;
+}
+
+.ui.item p {
+	margin: 10px;
+}
+
+.pager li {
+	list-style: none;
+	float: left;
+	padding: 5px;
+	font-size: 18px;
+	line-height: 10px;
+}
+
+.pager li.active a {
+	color:red;
+}

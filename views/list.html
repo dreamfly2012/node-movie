@@ -1,0 +1,36 @@
+<% include adminheader.html %>
+	<div class="container">
+		<div class="jumbotron">
+		  <h1>文章列表</h1>
+		</div>
+		<div class="row">
+			<table class="table table-bordered">
+			    <% for(var i in list){ %>
+				     <tr><th><a href="/post/edit/<%= list[i].id %>"><%= list[i].title %></a> <span style="float:right;display:inline-block;cursor: pointer;" class="delete" data-id="<%= list[i].id %>">删除</span></th></tr>
+				<% } %>
+			</table>
+			<% include pager.html %>
+		</div>
+	</div>
+<script type="text/javascript">
+	$('.delete').click(function(){
+		var id = $(this).attr('data-id');
+		if(confirm('是否删除?')){
+			$.ajax({
+				url:"/list/delete/",
+				data:{id:id},
+				dataType:'json',
+				type:'POST',
+				success:function(data){
+					if(data.result==true) {
+						window.location.reload();
+					} else {
+						alert('删除失败');
+					}
+				}
+			});
+		}
+	});
+</script>
+</body>
+</html>
