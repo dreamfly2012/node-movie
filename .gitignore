@@ -26,6 +26,20 @@ dist/
 temp/
 tmp/
 
+# AI / agent tooling workspaces (local only, do not commit)
+.agnes/
+.agnes/**
+.agnes/uploads/
+.agnes/cache/
+.agnes/work/
+.workbuddy/
+.sublime/
+*.sublime-project
+*.sublime-workspace
+.claude/
+.claude/**
+uploads/
+
 # Secrets / Config
 .env
 .env.*
