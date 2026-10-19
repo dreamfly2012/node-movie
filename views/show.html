@@ -1,14 +1,13 @@
-<% include header.html %>
-<div class="ui inverted vertical masthead center aligned segment">
-   	<div class="ui container">
-		<h1 class="ui h1"><%= title %></h1>
-		<div style="padding: 10px;font-size:14px;color:#e64141;">
-		    <%- summary %>
-		</div>
-		<div style="font-size: 18px;color:#bdefb7;">
-		    <%- content %>
-		</div>
-	</div>
-</div>	
-</body>
-</html>
+<%- include('header.html') %>
+<div class="site-wrap">
+    <h1 class="ui h1"><%= title %></h1>
+    <% if (cover) { %>
+    <img class="post-cover" src="<%= cover %>" alt="<%= title %>" />
+    <% } %>
+    <p class="ui p" style="font-style:italic;color:var(--text-muted);border-left:3px solid var(--primary);padding-left:14px;margin-top:18px;">
+        <%- summary %>
+    </p>
+    <div class="post-body">
+        <%- content %>
+    </div>
+</div>

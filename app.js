@@ -4,9 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 
 var site = require('./routes/index');
+var article = require('./routes/article');
 var user = require('./routes/user');
 var post = require('./routes/post');
 var highcharts = require('./routes/highcharts');
@@ -28,6 +30,11 @@ app.set('view engine', 'html');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(session({
+  secret: 'node-movie-secret',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -38,11 +45,24 @@ app.use('/static', express.static('public'));
 app.use('/semantic', express.static('semantic'));
 
 app.get('/', site.index);
+app.get('/articles/', article.view);
+app.get('/article/:id', article.show);
 app.get('/highcharts/',highcharts.view);
 app.get('/user/:name', user.view);
 app.get('/user/:name/edit', user.edit);
 app.get('/category/', category.view);
+app.get('/category/add/', category.add);
+app.post('/category/add_do/', category.add_do);
+app.get('/category/edit/:id', category.edit);
+app.post('/category/edit_do/', category.edit_do);
+app.post('/category/delete/', category.delete_do);
 app.get('/post/:id', post.view);
+app.get('/post/edit/:id', post.edit);
+app.post('/post/edit_do/', post.edit_do);
+app.get('/add/', post.add);
+app.post('/post/add_do/', post.add_do);
+app.get('/list/', post.list);
+app.post('/list/delete/', post.delete);
 app.get('/admin/',admin.index);
 app.get('/login/',login.index);
 app.post('/login/handle/',login.handle);

@@ -1,35 +1,55 @@
-<% include adminheader.html %>
+<%- include('adminheader.html') %>
 
-<div class="container">
-   	<div class="row">
-   		<h1 class="ui header white_imp">添加文章</h1>
-   		<form class="ui form" action="/post/add_do/" method="post">
-		  <div class="form-group">
-		    <label class='white_imp'>标题</label>
-		    <input type="text" name="title" class="form-control" placeholder="标题">
-		  </div>
-		  <div class="form-group">
-		    <label class='white_imp'>简介</label>
-		    <input type="text" name="summary" class="form-control" placeholder="简介">
-		  </div>
-		  <div class="form-group">
-		    <label class='white_imp'>内容</label>
-		    <script id="container" name="content" type="text/plain"></script>
-		    <!-- 配置文件 -->
-		    <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
-		    <!-- 编辑器源码文件 -->
-		    <script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
-		    <!-- 实例化编辑器 -->
-		    <script type="text/javascript">
-		    	window.UEDITOR_HOME_URL = "/ueditor/ue/";
-		        var ue = UE.getEditor('container',{
-		        	initialFrameHeight:600
-		        });
-		    </script>
-		  </div>
-		  <button class="btn btn-success" type="submit">添加</button>
-		</form>
-	</div>
-</div>		
+<div class="card form-card">
+    <h1>添加文章</h1>
+    <p class="subtitle">填写标题、简介、封面图，并使用编辑器撰写正文</p>
+    <form action="/post/add_do/" method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <label>标题</label>
+            <input type="text" name="title" class="control" placeholder="文章标题" required/>
+        </div>
+        <div class="form-row">
+            <label>简介</label>
+            <input type="text" name="summary" class="control" placeholder="一句话简介"/>
+        </div>
+        <div class="form-row">
+            <label>封面图（可选，支持 jpg/png/webp/gif，≤5MB）</label>
+            <input type="file" name="cover" accept="image/*" class="control cover-input"/>
+            <div class="cover-preview-box" id="cover-preview-box" hidden>
+                <img id="cover-preview-src" src="" alt="封面预览"/>
+                <span>封面预览</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <label>正文</label>
+            <script id="container" name="content" type="text/plain"></script>
+            <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+            <script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+            <script type="text/javascript">
+                window.UEDITOR_HOME_URL = "/ueditor/ue/";
+                var ue = UE.getEditor('container', { initialFrameHeight: 500 });
+            </script>
+        </div>
+        <button class="btn btn-accent" type="submit">发布文章</button>
+    </form>
+</div>
+
+</main>
+<script>
+// 隐藏预览容器：选中文件后显示预览
+(function(){
+  var input = document.querySelector('input[name=cover]');
+  var box = document.getElementById('cover-preview-box');
+  var img = document.getElementById('cover-preview-src');
+  input.addEventListener('change', function(){
+    if (this.files[0]) {
+      img.src = URL.createObjectURL(this.files[0]);
+      box.hidden = false;
+    } else {
+      box.hidden = true;
+    }
+  });
+})();
+</script>
 </body>
 </html>

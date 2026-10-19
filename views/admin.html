@@ -1,18 +1,28 @@
-<% include adminheader.html %>
+<%- include('adminheader.html') %>
 
-<div class="container">
-
-	<div class="row">
-		<h1>后台管理</h1>
-	</div>
-	
-	<div class="row">
-		<ul class="list-group">
-		  <li class="list-group-item"><a href="/add/">添加文章</a></li>
-		  <li class="list-group-item"><a href="/list/">文章列表</a></li>
-		  <li class="list-group-item"><a href="/category/">分类管理</a></li>
-		</ul>
-	</div>
+<div class="card">
+    <h1>后台管理</h1>
+    <p class="subtitle">选择你要进行的操作</p>
 </div>
+
+<div class="entry-grid">
+    <a class="entry-card" href="/add/">
+        <div class="icon">✎</div>
+        <div class="title">添加文章</div>
+        <div class="desc">新建一篇影评或动态</div>
+    </a>
+    <a class="entry-card" href="/list/">
+        <div class="icon">☰</div>
+        <div class="title">文章列表</div>
+        <div class="desc">查看、编辑或删除文章</div>
+    </a>
+    <a class="entry-card" href="/category/">
+        <div class="icon">▤</div>
+        <div class="title">分类管理</div>
+        <div class="desc">维护文章分类</div>
+    </a>
+</div>
+
+</main>
 </body>
 </html>

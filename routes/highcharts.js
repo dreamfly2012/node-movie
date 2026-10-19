@@ -13,13 +13,12 @@ exports.view = function(req, res,next) {
         if(result.length==0){
         	res.render('category', {
 				title: '文章不存在',
-		        content: '404 not found'
+				categories: []
 		    });
         }else{
         	res.render('category', {
 				title: result[0]['title'],
-		        content: result[0]['content'],
-                posts:result
+                categories: result
 		    });
         }
         //res.send(result.length === 1 ? result[0]:result);

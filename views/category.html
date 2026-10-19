@@ -1,36 +1,62 @@
-<% include header.html %>
-<div class="ui inverted vertical masthead aligned segment">
-   	<div class="ui container">
-		<h1 class="ui h1">分类列表</h1>
-		<a class="ui ui-button" href="/category/add/">添加分类</a>
-		<div class="ui list">
-		  <% categories.forEach(function(category){ %>
-		    <div class="ui item">
-		    	<h2 class="ui h2"><a href="/category/edit/<%= category.id %>"><%= category.name %></a><a style="padding-left:20px;" class="delete" data-id="<%= category.id %>">删除</a></h2>
-		    </div>
-		  <% }); %>
-		</div>
-	</div>
+<%- include('adminheader.html') %>
+
+<div class="card table-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div>
+            <h1 style="margin-bottom:2px;">分类管理</h1>
+            <p class="subtitle" style="margin:0;">共 <%= (categories && categories.length) ? categories.length : 0 %> 个分类</p>
+        </div>
+        <a class="btn btn-sm" href="/category/add/">＋ 添加分类</a>
+    </div>
+    <% if (categories && categories.length) { %>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:60px;">ID</th>
+                <th>分类名</th>
+                <th style="width:140px;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% categories.forEach(function(category){ %>
+            <tr>
+                <td><span class="badge-tag">#<%= category.id %></span></td>
+                <td><%= category.name %></td>
+                <td class="row-actions">
+                    <a class="btn-sm" style="color:var(--primary);text-decoration:none;margin-right:8px;" href="/category/edit/<%= category.id %>">编辑</a>
+                    <button class="btn-danger-ghost" data-id="<%= category.id %>">删除</button>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+    <div class="empty">暂无分类，点击右上角添加</div>
+    <% } %>
 </div>
-<script type="text/javascript">
-	$('.delete').click(function(){
-		var id = $(this).attr('data-id');
-		if(confirm('是否删除?')){
-			$.ajax({
-				url:"/category/delete/",
-				data:{id:id},
-				dataType:'json',
-				type:'POST',
-				success:function(data){
-					if(data.result==true) {
-						window.location.reload();
-					} else {
-						alert('删除失败');
-					}
-				}
-			});
-		}
-	});
-</script>	
+
+</main>
+<script>
+(function(){
+  var btns = document.querySelectorAll('.btn-danger-ghost[data-id]');
+  for (var i=0;i<btns.length;i++){
+    btns[i].addEventListener('click', function(){
+      var id = this.getAttribute('data-id');
+      if (confirm('确定删除该分类吗？')){
+        fetch('/category/delete/', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({id: id})
+        }).then(function(r){ return r.json(); })
+          .then(function(data){
+            if (data && data.result===true) { window.location.reload(); }
+            else { alert('删除失败'); }
+          })
+          .catch(function(){ alert('删除失败'); });
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>

@@ -1,18 +1,18 @@
-<% include header.html %>
-<div class="ui inverted masthead aligned segment">
-    <div class="ui container">
-        <div class="ui list">
-            <% posts.forEach(function(post){ %>
-            <div class="ui item">
-                <h2 class="ui h2">
-                    <a href="/article/<%= post.id %>"><%= post.title %></a>
-                </h2>
-                <p>
-                    <%- post.summary %>
-                </p>
+<%- include('header.html') %>
+<div class="site-wrap">
+    <h1 class="ui h1">文章</h1>
+    <div class="post-list">
+        <% posts.forEach(function(post){ %>
+        <a class="post-item" href="/article/<%= post.id %>">
+            <% if (post.cover) { %>
+            <img class="post-item-cover" src="<%= post.cover %>" alt="<%= post.title %>" />
+            <% } %>
+            <div class="post-item-body">
+                <div class="post-item-title"><%= post.title %></div>
+                <div class="post-item-summary"><%- post.summary %></div>
             </div>
-            <% }); %>
-        </div>
-        <% include pager.html %>
+        </a>
+        <% }); %>
     </div>
+    <%- include('pager.html') %>
 </div>

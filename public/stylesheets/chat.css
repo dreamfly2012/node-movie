@@ -24,6 +24,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: var(--bg);
+  color: var(--text);
 }
 
 ul {
@@ -49,7 +51,7 @@ ul {
 /* Login Page */
 
 .login.page {
-  background-color: #000;
+  background-color: var(--bg);
 }
 
 .login.page .form {
@@ -65,7 +67,7 @@ ul {
 .login.page .form .usernameInput {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid var(--text-muted);
   outline: none;
   padding-bottom: 15px;
   text-align: center;
@@ -82,7 +84,7 @@ ul {
 }
 
 .login.page .title, .login.page .usernameInput {
-  color: #fff;
+  color: var(--text);
   font-weight: 100;
 }
 
@@ -103,7 +105,7 @@ ul {
 }
 
 .log {
-  color: gray;
+  color: var(--text-muted);
   font-size: 70%;
   margin: 5px;
   text-align: center;
@@ -124,7 +126,7 @@ ul {
 }
 
 .message.typing .messageBody {
-  color: gray;
+  color: var(--text-muted);
 }
 
 .username {
@@ -137,7 +139,7 @@ ul {
 /* Input */
 
 .inputMessage {
-  border: 10px solid #000;
+  border: 10px solid var(--surface);
   bottom: 0;
   height: 60px;
   left: 0;
@@ -146,5 +148,6 @@ ul {
   position: absolute;
   right: 0;
   width: 100%;
-  color:#0e0e0e;
+  color: var(--text);
+  background: var(--surface);
 }

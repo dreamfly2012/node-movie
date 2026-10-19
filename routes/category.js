@@ -13,7 +13,7 @@ exports.view = function(req, res, next) {
             console.log(result);
             res.render('category', {
                 title: '文章列表',
-                categories: result
+                categories: result || []
             });
         });
     } else {
@@ -55,7 +55,7 @@ exports.edit = function(req, res, next){
         var category = new Category();
         category.find(id, function(err, result){
             console.log(result);
-            if(result.length==0){
+            if(!result || result.length==0){
                 res.render('postview', {
                     title: '分类不存在',
                     content: '404 not found'
@@ -97,7 +97,7 @@ exports.delete_do = function(req, res, next){
             if(err) {
                 res.json({result:false});
             } else {
-                if (result.affectedRows) {
+                if (result && result.affectedRows) {
                     res.json({result: true});
                 } else {
                     res.json({result: false});
@@ -108,4 +108,3 @@ exports.delete_do = function(req, res, next){
         res.redirect("/login/");
     }
 }
-

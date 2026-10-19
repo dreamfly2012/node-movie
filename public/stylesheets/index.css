@@ -1,21 +1,18 @@
-body{
-  background:#1b1c1d;
-  color: rgba(255,255,255,.9);
+/* 首页样式：颜色随主题变量（主题逻辑统一在 theme.css） */
+body {
+  background: var(--bg);
+  color: var(--text);
 }
 
-h1.ui.header {
-  font-size: 3em;
-  color: rgba(255, 255, 255, 1);
-  line-height: 1.2;
-  margin: 0px 0px 0px;
-  padding-bottom: 0px;
-  -moz-perspective: 500px;
-  -webkit-perspective: 500px;
-  perspective: 500px;
-
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-
-  -moz-transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
+/* 首页主视觉图（横版 banner） */
+.site-wrap p.ui.p img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
 }
+
+/* 首页两篇小段文字之间的间距 */
+.site-wrap p.ui.p + p.ui.p { margin-top: 18px; }

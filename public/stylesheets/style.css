@@ -1,32 +1,54 @@
+/* 前台基础样式：颜色跟随主题变量（浅色/深色自动切换） */
 body {
-  padding: 50px;
-  background: #1b1c1d;
-  color: rgba(255,255,255,.9);
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px "Segoe UI", "Microsoft YaHei", "Lucida Grande", Helvetica, Arial, sans-serif;
+  transition: background-color .25s ease, color .25s ease;
 }
 
 a {
-  color: #00B7FF;
+  color: var(--primary);
 }
-.fr{
-	float:right;
+
+.fr {
+  float: right;
 }
+
 .fl {
-	float:left;
+  float: left;
 }
 
 .ui.item p {
-	margin: 10px;
+  margin: 10px;
+  color: var(--text-muted);
 }
 
+/* 分页 */
+.pager {
+  text-align: center;
+  margin: 24px 0;
+}
 .pager li {
-	list-style: none;
-	float: left;
-	padding: 5px;
-	font-size: 18px;
-	line-height: 10px;
+  list-style: none;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0 4px;
+  font-size: 15px;
+  line-height: 1.4;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
 }
-
+.pager li a {
+  text-decoration: none;
+  color: var(--text);
+}
+.pager li a:hover { color: var(--primary); }
 .pager li.active a {
-	color:red;
+  color: #fff;
+  background: var(--primary);
+}
+.pager li.active {
+  border-color: var(--primary);
 }
